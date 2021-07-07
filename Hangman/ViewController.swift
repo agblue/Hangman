@@ -167,13 +167,13 @@ class ViewController: UIViewController {
             
 
         ])
-        
+//        Testing Label borders
 //        strikesLabel.backgroundColor = .yellow
 //        manTextView.backgroundColor = .cyan
 //        displayWordLabel.backgroundColor = .red
 //        buttonsView.backgroundColor = .blue
 //
-        // Load Data File.
+        // Load data file of words
         loadDataFile()
         
     }
@@ -222,6 +222,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             if let firstWord = self?.gameWords.removeFirst() {
                 self?.currentWord = firstWord.uppercased()
+                print(self?.currentWord)
             
                 self?.displayWordLabel.text? = ""
                 for _ in firstWord {
@@ -383,14 +384,19 @@ class ViewController: UIViewController {
             }
             displayWordLabel.text = revealWord
             
-            lookupWordMeaning()
-            
-//            let ac = UIAlertController(title: "Game Over", message: "You've been hung!", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "Dead", style: .destructive, handler: startOverAction))
-//            present(ac, animated: true)
+            let ac = UIAlertController(title: "Game Over", message: "As the sweat falls from your brow, you contemplate how a simple word could have gotten you out of this mess.", preferredStyle: .alert)
+            if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord) {
+                ac.addAction(UIAlertAction(title: "Define", style: .default, handler: lookupWordMeaningAction))
+            }
+            ac.addAction(UIAlertAction(title: "Dead", style: .destructive, handler: startOverAction))
+            present(ac, animated: true)
+
         } else if let displayWord = displayWordLabel.text {
             if !displayWord.contains("_") {
-                let ac = UIAlertController(title: "You Win", message: "You're free to go!", preferredStyle: .alert)
+                let ac = UIAlertController(title: "You Win", message: "Our mistake, you're free to go!", preferredStyle: .alert)
+                if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord) {
+                    ac.addAction(UIAlertAction(title: "Define", style: .default, handler: lookupWordMeaningAction))
+                }
                 ac.addAction(UIAlertAction(title: "Woohoo!", style: .default, handler: startOverAction))
                 present(ac, animated: true)
             }
@@ -403,7 +409,7 @@ class ViewController: UIViewController {
     
     func startOver() {
         loadRandomWord()
-
+        
         strikes = 0
         strikesLabel.text = "STRIKES:"
         guessedLetters.removeAll()
@@ -418,14 +424,14 @@ class ViewController: UIViewController {
         resetAnimation()
     }
     
+    func lookupWordMeaningAction(action:UIAlertAction) {
+        lookupWordMeaning()
+    }
+    
     func lookupWordMeaning() {
         if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord) {
             let childVC = UIReferenceLibraryViewController(term: currentWord)
             self.present(childVC, animated: true, completion: startOver)
-        } else {
-            let ac = UIAlertController(title: "Game Over", message: "You've been hung!", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Dead", style: .destructive, handler: startOverAction))
-            present(ac, animated: true)
         }
     }
 }
