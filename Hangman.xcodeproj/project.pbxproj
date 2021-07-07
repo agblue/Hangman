@@ -13,6 +13,7 @@
 		F56FACD9268E50EF0031D726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56FACD7268E50EF0031D726 /* Main.storyboard */; };
 		F56FACDB268E50F00031D726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F56FACDA268E50F00031D726 /* Assets.xcassets */; };
 		F56FACDE268E50F00031D726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56FACDC268E50F00031D726 /* LaunchScreen.storyboard */; };
+		F56FACE6268EB2800031D726 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = F56FACE5268EB2800031D726 /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F56FACDA268E50F00031D726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F56FACDD268E50F00031D726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F56FACDF268E50F00031D726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F56FACE5268EB2800031D726 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				F56FACDA268E50F00031D726 /* Assets.xcassets */,
 				F56FACDC268E50F00031D726 /* LaunchScreen.storyboard */,
 				F56FACDF268E50F00031D726 /* Info.plist */,
+				F56FACE5268EB2800031D726 /* start.txt */,
 			);
 			path = Hangman;
 			sourceTree = "<group>";
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F56FACDE268E50F00031D726 /* LaunchScreen.storyboard in Resources */,
+				F56FACE6268EB2800031D726 /* start.txt in Resources */,
 				F56FACDB268E50F00031D726 /* Assets.xcassets in Resources */,
 				F56FACD9268E50EF0031D726 /* Main.storyboard in Resources */,
 			);
@@ -296,7 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dannytsang.Hangman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -315,7 +319,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dannytsang.Hangman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
