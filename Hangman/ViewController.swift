@@ -432,6 +432,10 @@ class ViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "Dead", style: .destructive, handler: startOverAction))
             present(ac, animated: true)
 
+            
+            // Reset streak.
+            streak = 0
+            
         } else if let displayWord = displayWordLabel.text {
             if !displayWord.contains("_") {
                 let ac = UIAlertController(title: "You Win", message: "Our mistake, you're free to go!", preferredStyle: .alert)
