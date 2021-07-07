@@ -32,10 +32,24 @@ class ViewController: UIViewController {
     var buttonHeight = 60
     var buttonWidth = 60
     
+    var highScoreLabel: UILabel!
+    var highScore = 0 {
+        didSet {
+            highScoreLabel.text = "Highscore: \(highScore)"
+        }
+    }
+    var streakLabel: UILabel!
+    var streak = 0 {
+        didSet {
+            streakLabel.text = "Streak: \(streak)"
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         skyView = UIView()
         skyView.translatesAutoresizingMaskIntoConstraints = false
         skyView.backgroundColor = .cyan
@@ -62,7 +76,23 @@ class ViewController: UIViewController {
         groundView.translatesAutoresizingMaskIntoConstraints = false
         groundView.backgroundColor = .brown
         view.addSubview(groundView)
-                
+
+        highScoreLabel = UILabel()
+        highScoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        highScoreLabel.text = "High Score: 0"
+        highScoreLabel.textAlignment = .right
+        highScoreLabel.font = UIFont.systemFont(ofSize: 20)
+        highScoreLabel.sizeToFit()
+        view.addSubview(highScoreLabel)
+
+        streakLabel = UILabel()
+        streakLabel.translatesAutoresizingMaskIntoConstraints = false
+        streakLabel.text = "Streak: 0"
+        streakLabel.textAlignment = .right
+        streakLabel.font = UIFont.systemFont(ofSize: 20)
+        streakLabel.sizeToFit()
+        view.addSubview(streakLabel)
+        
         titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "H A N G M A N"
@@ -143,6 +173,13 @@ class ViewController: UIViewController {
             groundView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             groundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            // Add Label Constraints
+            highScoreLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 50),
+            highScoreLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+
+            streakLabel.topAnchor.constraint(equalTo: highScoreLabel.bottomAnchor, constant: 5),
+            streakLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            
             titleLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 50),
             titleLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -175,6 +212,10 @@ class ViewController: UIViewController {
 //
         // Load data file of words
         loadDataFile()
+        
+        // Load High Score
+        let defaults = UserDefaults.standard
+        highScore = defaults.integer(forKey: "highScore")
         
     }
     
@@ -399,6 +440,17 @@ class ViewController: UIViewController {
                 }
                 ac.addAction(UIAlertAction(title: "Woohoo!", style: .default, handler: startOverAction))
                 present(ac, animated: true)
+                
+                // Increase Streak
+                streak += 1
+                
+                // Check for high score
+                if streak > highScore {
+                    highScore = streak
+                    
+                    let defaults = UserDefaults.standard
+                    defaults.set(highScore, forKey: "highScore")
+                }
             }
         }
     }
